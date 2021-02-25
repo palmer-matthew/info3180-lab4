@@ -9,8 +9,8 @@
 <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
   {{ form.csrf_token }}
   <div class="form-group">
-    {{ form.upload.label }}
-    {{ form.upload }}
+    {{ form.file.label }}
+    {{ form.file }}
   </div>
   <button type="submit" name="submit" class="btn btn-primary">Upload file</button>
 </form>
