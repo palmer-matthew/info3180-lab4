@@ -1,24 +1,38 @@
 body {
     padding-top: 5rem;
 }
+
 .center{
     text-align: center;
     text-decoration: underline;
     margin-bottom: 5%;
 }
-.grid{
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(3, 31.5%);
-    height: 2%;
-    gap: 0 20px;
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 5%;
 }
 
-.grid img{
-    width: 100%;
-    height: 60%;
+.flex img{
+    width: 30%;
+    height: 50vh;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
-.grid img:hover{
+.flex img:hover{
     opacity: 0.75;
 }
+
+label{
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+label::after{
+    content: ':';
+}
+
+
+
