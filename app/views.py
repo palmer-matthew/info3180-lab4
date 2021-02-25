@@ -6,10 +6,22 @@ This file creates your application.
 """
 import os
 from app import app
-from flask import render_template, request, redirect, url_for, flash, session, abort
+from flask import render_template, request, redirect, url_for, flash, session, abort, send_from_directory
 from werkzeug.utils import secure_filename
 from .forms import UploadForm
 
+###
+# Helper Functions
+###
+
+def get_uploaded_files():
+    rootdir = os.getcwd()
+    lst = []
+    for subdir, dirs, files in os.walk(rootdir + '/uploads'):
+        for file in files:
+            if '.gitkeep' not in file:
+                lst.append(file)
+    return lst
 
 ###
 # Routing for your application.
@@ -47,6 +59,19 @@ def upload():
         flash_errors(upload_form)
     return render_template('upload.html', form=upload_form)
 
+
+@app.route('/uploads/<filename>')
+def get_image(filename):
+    root_dir = os.getcwd()
+    return send_from_directory(os.path.join(root_dir, app.config['UPLOAD_FOLDER']), filename)
+
+@app.route('/files')
+def files():
+    if not session.get('logged_in'):
+        abort(401)
+    else:
+        file_list = get_uploaded_files()
+        return render_template('files.html', pics=file_list)
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
