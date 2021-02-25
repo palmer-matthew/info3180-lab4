@@ -65,6 +65,7 @@ def get_image(filename):
     root_dir = os.getcwd()
     return send_from_directory(os.path.join(root_dir, app.config['UPLOAD_FOLDER']), filename)
 
+
 @app.route('/files')
 def files():
     if not session.get('logged_in'):
@@ -72,6 +73,7 @@ def files():
     else:
         file_list = get_uploaded_files()
         return render_template('files.html', pics=file_list)
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
